@@ -2,29 +2,375 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Food blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culinary Chronicles - Food Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: relative;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #ffd89b;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffd89b;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&h=600&fit=crop') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        /* Featured Articles Section */
+        .featured-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #667eea;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        article {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        article img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .article-content h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        article:hover .article-content h3 {
+            color: #667eea;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .article-content p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #764ba2;
+            margin-left: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+        footer h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 12px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+            transform: scale(1.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 20px;
+                flex-direction: column;
+                height: auto;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-content h2 {
+                font-size: 32px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .hero {
+                height: 350px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header style="height:100px;background-color:lightblue;"/>
-    <img src="./food.jpg" style="height:200px;width:200px;"/>
-    <h2>food blog</h2>
-    <nav>
-        <ul style="height:200px;background-color:lightpink;"/>
-        <li>Home</li>
-        <li>about</li>
-        <li>contact</li>
-        <li>address</li>
-        <li>places</li>
-    </ul>
-    </nav>
-    <main style="height:400px;background-color:lightgreen;"/>
-    <section style="height:200px;background-color:lightyellow;"/>
-    <article style="height:200px;background-color:lightgray;"/>>
-</section>
-</article>
-</main>
-<footer style="height:100px;background-color:lightcoral;"/>
-</footer>
+    <!-- Header -->
+    <header>
+        <h1>🍽️ Culinary Chronicles</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#recipes">Recipes</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Discover Amazing Food</h2>
+            <p>Explore recipes, stories, and culinary inspirations from around the world</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Featured Articles -->
+        <section class="featured-section">
+            <h2 class="section-title">Featured Recipes</h2>
+            <div class="articles-grid">
+                <article>
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Colorful Salad">
+                    <div class="article-content">
+                        <h3>Vibrant Garden Salad</h3>
+                        <p class="article-meta">Posted on April 17, 2026 • 5 min read</p>
+                        <p>Fresh vegetables tossed with a light vinaigrette, perfect for a healthy lunch.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" alt="Gourmet Burger">
+                    <div class="article-content">
+                        <h3>Gourmet Burger Perfection</h3>
+                        <p class="article-meta">Posted on April 15, 2026 • 8 min read</p>
+                        <p>Craft the ultimate burger with premium ingredients and secret sauce recipe.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&h=300&fit=crop" alt="Delicious Pizza">
+                    <div class="article-content">
+                        <h3>Homemade Pizza Mastery</h3>
+                        <p class="article-meta">Posted on April 12, 2026 • 10 min read</p>
+                        <p>Learn the art of making authentic pizza dough and topping combinations.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Pasta Dish">
+                    <div class="article-content">
+                        <h3>Italian Pasta Experience</h3>
+                        <p class="article-meta">Posted on April 10, 2026 • 6 min read</p>
+                        <p>Traditional Italian pasta recipes that bring authentic flavors to your kitchen.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop" alt="Dessert">
+                    <div class="article-content">
+                        <h3>Decadent Chocolate Cake</h3>
+                        <p class="article-meta">Posted on April 8, 2026 • 7 min read</p>
+                        <p>Indulge in the richest chocolate cake recipe with fudge frosting.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="https://images.unsplash.com/photo-1517248135467-4d71bcdd2085?w=400&h=300&fit=crop" alt="Breakfast">
+                    <div class="article-content">
+                        <h3>Perfect Breakfast Bowl</h3>
+                        <p class="article-meta">Posted on April 5, 2026 • 4 min read</p>
+                        <p>Start your day right with nutrient-packed breakfast bowls.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <h4>Culinary Chronicles</h4>
+        <p>&copy; 2026 Food Blog. All rights reserved.</p>
+        <p>Sharing passion for food, one recipe at a time.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+            <a href="#">Pinterest</a>
+        </div>
+    </footer>
 </body>
 </html>
